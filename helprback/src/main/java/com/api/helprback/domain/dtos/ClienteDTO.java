@@ -1,10 +1,9 @@
 package com.api.helprback.domain.dtos;
 
-import com.api.helprback.domain.Tecnico;
+import com.api.helprback.domain.Cliente;
 import com.api.helprback.domain.enums.Perfil;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,29 +11,37 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class TecnicoDTO implements Serializable {
+public class ClienteDTO implements Serializable {
     private static final long serialVersionUID = 1L;
 
     protected Integer id;
+
     @NotNull(message = "O Campo NOME é requerido!")
     protected String nome;
+
     @NotNull(message = "O campo CPF é requerido!")
     protected String cpf;
+
     @NotNull(message = "O campo E-MAIL é requerido!")
     protected String email;
+
     @NotNull(message = "O campo SENHA é requerido!")
-   protected String senha;
+    protected String senha;
+
     protected Set<Integer> perfis = new HashSet<>();
 
     @JsonFormat(pattern = "dd/MM/yyyy")
     protected LocalDate dataCriacao = LocalDate.now();
 
-    public TecnicoDTO() {
+
+    public ClienteDTO(){
         super();
         addPerfis(Perfil.CLIENTE);
     }
 
-    public TecnicoDTO(Tecnico obj) {
+
+
+    public ClienteDTO(Cliente obj) {
         super();
         this.id = obj.getId();
         this.nome = obj.getNome();
@@ -81,13 +88,15 @@ public class TecnicoDTO implements Serializable {
     public String getSenha() {
         return senha;
     }
+
     public void setSenha(String senha) {
         this.senha = senha;
-   }
+    }
 
 
     public Set<Perfil> getPerfis() {
         return perfis.stream().map(x-> Perfil.toEnum(x)).collect(Collectors.toSet());
+
     }
 
     public void addPerfis(Perfil perfis) {

@@ -21,6 +21,8 @@ public class TecnicoResource {
     @Autowired
     private TecnicoService tecnicoService;
 
+
+
     @GetMapping(value="/{id}")
     public ResponseEntity<TecnicoDTO> findById(@PathVariable Integer id){
         Tecnico obj = this.tecnicoService.findById(id);
